@@ -1,0 +1,17 @@
+doctype html
+html(lang="en")
+    head
+        title= title
+        link(rel='stylesheet', href='/static/stylesheets/style.css')
+    nav
+        ul  
+            li
+                a(href='../') Home
+            li
+                a(href='../allBooks') Books
+            li
+                a(href='../allPatrons') Patrons
+            li
+                a(href='../allLoans') Loans
+    body
+        block content

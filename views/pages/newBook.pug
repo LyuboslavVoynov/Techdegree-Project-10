@@ -1,0 +1,24 @@
+extends ../layout
+
+block content
+    h1= title
+    if (errors)
+      h3.error Error!
+        each error in errors
+          h4.error= error.message
+    form#newBook( method="POST" action="/newbook")
+        p
+            label(for='title') *Title
+            input#title(type='text' name="title")
+        p
+            label(for='author') *Author
+            input#author(type='text' name="author")
+        p
+            label(for='genre') *Genre
+            input#genre(type='text' name="genre")
+        p
+            label(for='first_published') *First Published
+            input#first_published(type='text' name="first_published")
+        sup * Required field
+        p
+            input.bookSubmit#newBookSubmit(type='submit' value='Create New Book')

@@ -1,0 +1,23 @@
+extends ../layout
+
+block content
+    h1= title
+
+    p
+        strong Book Title: 
+        |#{book.title}
+    p
+        strong Loaned By: 
+        | #{patrons[0].first_name} #{patrons[0].last_name}
+    p
+        strong Loaned On: 
+        td= moment(loans[0].loaned_on).format("MM-DD-YYYY")
+    p
+        strong Return By: 
+        td= moment(loans[0].return_by).format("MM-DD-YYYY")
+    form#returnBook( method="POST" action='/' + loans[0].id + '/return')
+        p
+            label(for='returned_on') Returned on:
+            input#returned_on(type='date' value=date name='returned_on')
+        p
+            input#returnBookSubmit(type='submit' value='Return Book')

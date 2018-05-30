@@ -1,0 +1,30 @@
+extends ../layout
+
+block content
+    h1= title
+    if (errors)
+      h3.error Error!
+        each error in errors
+          h4.error= error.message
+    form#newPatron( method="POST" action="/newpatron")
+        p
+            label(for='first_name') *First Name
+            input#first_name(type='text' name="first_name")
+        p
+            label(for='last_name') *Last Name
+            input#last_name(type='text' name="last_name")
+        p
+            label(for='address')  *Address
+            input#address(type='text' name ="address")
+        p
+            label(for='email') *Email
+            input#email(type='text' name="email")
+        p
+            label(for='library_id') *Library ID
+            input#library_id(type='text' name="library_id")
+        p
+            label(for='zip_code') *Zip Code
+            input#zip_code(type='text' name="zip_code")    
+        sup * Required field
+        p
+            input.patronSubmit#newPatronSubmit(type='submit' value='Create New Patron')

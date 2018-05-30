@@ -1,0 +1,45 @@
+extends ../layout
+
+block content
+    h1= title
+    p
+        a.button(href='newLoan') Create New Loan
+    p
+        | Filters 
+        a(href='allLoans') All
+        |  | 
+        a(href='overdueLoans') Overdue
+        |  | 
+        a(href='checkedLoans') Checked Out
+    table
+        thead
+            tr
+                th Book
+                th Patron 
+                th Loaned on
+                th Return by 
+                th Returned on
+                th Action
+        tbody
+          tbody
+              each loan in loans
+                  tr
+                      td
+                        each book in books
+                          - if (loan.book_id === book.id)
+                            a(href='/' + book.id + '/book')= book.title
+                      td
+                        each patron in patrons
+                          - if (loan.patron_id === patron.id)
+                            a(href='/' + patron.id + '/patron') #{patron.first_name} #{patron.last_name}
+                        td= moment(loan.loaned_on).format("MM-DD-YYYY")
+                        td= moment(loan.return_by).format("MM-DD-YYYY")
+                        - if (loan.returned_on !== null)
+                          td= moment(loan.returned_on).format("MM-DD-YYYY")
+                        - if (loan.returned_on === null)
+                          td= loan.returned_on
+                            
+                      td
+                        each book in books
+                          - if (loan.returned_on === null && loan.book_id === book.id)
+                              a(href='/' + book.id + '/return') Return Book
